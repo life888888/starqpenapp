@@ -1,0 +1,374 @@
+= StarQ 點讀筆 App
+life888888
+:doctype: article
+:encoding: utf-8
+:lang: zh
+:toc: left
+:numbered:
+:experimental:
+:imagesdir: images
+:hide-uri-scheme:
+
+StarQ 點讀筆 【自己動手做錄放音貼紙】MP3轉檔工具。
+這個是私人針對 StarQ 點讀筆 自製 跨平台的【自己動手做錄放音貼紙】MP3轉檔工具。
+
+image:App000.png[]
+
+== 簡介
+
+為何要個人自製 StarQ 點讀筆 【自己動手做錄放音貼紙】MP3轉檔工具。
+針對 明日工作室 提供的 StarQ 點讀筆 【自己動手做錄放音貼紙】MP3轉檔工具，starQrecord.exe，有幾點無法接受。
+
+* 目前只有提供 Windows 工具程式。針對 Linux 或是 MacOS 都沒有提供支援工具。(因為我不使用 Windows平台)
+* 操作模式實在有些不夠人性化：
+** 要將MP3轉入點讀筆, 還要分為 單筆置入,批次置入。然後再去選擇批量選擇。
+** MP3檔案沒有預覽播放功能。只能等匯入之後才會知道是不是正確。
+** 檔案沒有顯示目前對應的貼紙顏色及編號
+
+因此針對上述部份，進行一些改善。
+
+* 使用 java 開發，封裝後的安裝程式，目前可以支援在 Windows, Linux - Deb , Linux - Rpm 安裝執行。(不需要使用者先安裝 JRE , JDK)。目前沒有支援 MacOS , 因為沒有環境可以測試及編譯。
+* 針對操作界面
+** 不需要區分 單筆置入或批次置入。
+** 使用者在選擇檔案時，可以點選　檔案名稱　來變更排序，可以單選一個檔案或是多選多個檔案。
+** 使用者可以點選某一檔案，預覽播放10秒鐘MP3，來確認是否正確。
+** 檔案清單上，直接顯示對應的貼紙顏色以及對應的編號。使用者可以上下調整檔案順序來對應貼紙順序。
+
+== 一般使用者
+
+如果你是 StarQ 點讀筆的使用者，並且購買了 StarQ 點讀筆的 【自己動手做錄放音貼紙】，那你可以考慮使用本工具。
+而不是原廠的工具程式。
+
+===  下載安裝及移除
+
+* 下載 `Releases/v0.0.1`
+** starq-pen-app-0.0.1.msi (For Windows x64)
+** starq-pen-app_0.0.1-1_amd64.deb (For Linux Deb - Ubuntu , ....)
+** starq-pen-app-0.0.1-1.x86_64.rpm (For Linux Rpm - Red Hat Linux , CentOS , Oracle Linux , ....)
+
+==== Windows 安裝及移除
+
+直接點擊 starq-pen-app-0.0.1.msi , 下一步,下一步,到結束。
+
+==== Linux - Deb 安裝及移除
+
+你可以使用你自己習慣的方式來安裝　starq-pen-app .deb 的方式來安裝或是參考以下的命令列安裝指令。
+
+.命令列安裝 Linux deb
+[source,bash]
+----
+sudo dpkg -i starq-pen-app_0.0.1-1_amd64.deb
+----
+
+.命令列移除 StarQ Pen App
+[source,bash]
+----
+sudo apt remove starq-pen-app
+----
+
+==== Linux - Rpm 安裝及移除
+
+你可以使用你自己習慣的方式來安裝　starq-pen-app .rpm 的方式來安裝或是參考以下的命令列安裝指令。
+
+.命令列安裝 Linux rpm
+[source,bash]
+----
+sduo yum localinstall starq-pen-app-0.0.1-1.x86_64.rpm
+----
+
+.命令列移除 StarQ Pen App
+[source,bash]
+----
+sudo yum remove starq-pen-app
+----
+
+=== 使用步驟
+
+執行前，請先將點讀筆連接到電腦上的USB連接口。
+
+總共就是4個步驟。
+
+==== Step 0 - 啟動程式
+
+你可以在你的桌面，或是系統對應的程式起始選單，找到 明日工作室對應的圖示。點擊圖示來啟動點讀筆匯入小幫手。
+
+Windows 可以從桌面 或是 開始位置 找到 點讀筆 App 圖示。
+
+image:App005.png[]
+
+Ubuntu 可以點選 顯示應用程式
+
+image:App001.png[]
+
+可以看到 全部 頁籤有 點讀筆 App 圖示。
+
+image:App002.png[]
+
+Oracle Linux 可以點選
+
+1. Activities
+2. 點選 顯示應用程式
+3. 畫面顯示  點讀筆 App 圖示(starq-pen-app)。
+
+image:App003.png[]
+
+以上，不論是那一種平台，只需要點擊 點讀筆 App 圖示。
+就可以啟動點讀筆匯入程式。
+
+image:App004.png[]
+
+
+==== Step 1 - 設定點讀筆位置
+
+點選 視窗左方的 資料夾圖示，開啟選擇資料夾視窗。
+
+image:App006.png[]
+
+
+請選擇你的點讀筆位置。
+
+1. 在 Windows 平台可能是 X: Y: Z:之類的位置。
+2. 你也可以選擇特定的目錄。
+(在 Linux 平台可能是 /media/你的使用者帳號/UL300 之類的路徑。)
+3. 點選按鈕 選擇資料夾。完成選擇點讀筆位置。
+
+image:App007.png[]
+
+選擇完成後，會顯示目前你選擇的點讀筆位置目錄。
+
+image:App008.png[]
+
+==== Step 2 - 設定貼紙顏色及起始編號
+
+請根據你目前要匯入的書本上的貼紙顏色，下拉選擇貼紙顏色。
+
+再根據你目前要匯入的第一張貼紙上面的編號，輸入貼紙起始編號欄位。(每種顏色的貼紙編號是1~1000)
+
+image:App009.png[]
+==== Step 3 - 選擇來源檔案
+
+點擊選擇來源檔案按鈕，開啟選擇檔案視窗。
+
+image:App010.png[]
+
+在選擇檔案視窗，你可以點選檔案名稱欄位，來根據檔案名稱做排序。
+你可以單選一個檔案，也可以一次選擇多個檔案，或是逐一點擊檔案選擇多個檔案。
+
+選擇完成後，點選按鈕 開啟。
+
+image:App011.png[]
+
+第一次加入檔案到清單，會有提示訊息對話窗。
+
+image:App012.png[]
+
+如果清單中有檔案存在，此時無法設定 點讀筆位置，貼紙顏色，貼紙編號。如果要修改，只能點選按鈕 清除以下清單。
+
+你可以重複多次 選擇來源檔案 來逐次加入檔案到清單當中。
+在選擇檔案視窗中，點擊　檔案名稱欄位來調整顯示的排序。
+
+image:App013.png[]
+
+==== Step 4 - 調整來源檔案
+
+如果已經選擇好要加入檔案。你可以在清單中，在貼紙編號欄位可以看到這個檔案對應的貼紙顏色及編號。
+
+image:App014.png[]
+
+你可以針對檔案清單做排序調整，移除，或是預覽播放mp3等動作。
+
+Step 4.1 你需要在下方清單中，點擊選擇你要的檔案。
+
+image:App015.png[]
+
+Step 4.2 你可以點擊 預覽播放10秒MP3 按鈕，來快速確認這個檔案是否是你要對應到貼紙顏色及編號的檔案。
+Step 4.3 如果發現這個檔案的排序位置有錯，不是對應的貼紙顏色及編號，你可以點選　向上移動或是向下移動。你可以發現檔案對應貼紙的編號，會跟著調整。
+Step 4.4 如果發現這個檔案完全就是選錯了，可以點選　移除檔案。就能將檔案從清單中移出。
+
+你可以將清單中的檔案逐一進行調整及確認。
+
+確認清單中的檔案沒問題後，就可以進行下一步 (Step 5 - 點擊 匯入檔案到點讀筆)。
+
+或是你想取消這些檔案選擇，也可以進行　Step 6 （點擊 清除以下清單）。
+
+==== Step 5 - 點擊 匯入檔案到點讀筆 按鈕
+
+確認清單中檔案沒問題後，就可以點擊　匯入檔案到點讀筆　按鈕。
+
+image:App016.png[]
+
+應該很快就會跳出　匯入完成的對話窗。
+
+到此完成匯入檔案到點讀筆。
+
+==== Step 6 - 點擊 清除以下清單 按鈕
+
+如果還要進行其他匯入檔案作業，請先點選　清除以下清單　按鈕，把清單內的檔案清除後，
+
+image:App017.png[]
+
+才能進行 Step 2 (設定貼紙顏色及起始編號), Step 3 (選擇來源檔案), Step 4 (調整來源檔案)
+
+image:App018.png[]
+
+== 開發者
+
+==== 程式使用技術
+
+* Java - 程式語言
+* Maven - 編譯打包封裝
+* SWT - GUI 顯示框架。(只要有對應平台支援的版本,就能支援編譯)
+* javazoom - jlayer 作為預覽播放 MP3的 Lib。
+* jpackage - 作為打包應用程式為安裝檔的工具程式。(JDK 內附工具程式)
+
+=== 下載原始碼
+
+* Download `Releases/v0.0.1` (starq-pen-app-0.0.1)
+* 下載後，解壓縮。
+
+=== 編譯
+
+==== 環境需求
+
+請先確認，你的環境已經安裝以下工具，並且配置妥當。
+
+* JDK 17.0.2 (開發環境, 建議使用 adoptium 家的 Open JDK , 避免 License 問題)
+* apache maven 3.8.4 (開發環境, 應該可以使用更低版本, 但是沒有測試過)
+
+==== 打包封裝 deb
+
+* 如果要打包封裝產生 .deb 檔案，需要在對應的 Linux DEB 平台，例如: Ubuntu。
+* 你無法在 Oracle Linux , Windows 上打包產生 .deb。
+
+.build Linux deb
+[source,bash]
+----
+mvn clean package exec:exec@jpackage-linux-deb
+
+# 以下是發生錯誤時，需要顯示更多資訊時。才去執行
+# mvn -X clean package exec:exec@jpackage-linux-deb
+----
+
+==== 打包封裝 rpm
+
+* 如果要打包封裝產生 .rpm 檔案，需要在對應的 Linux RPM 平台，例如: Oracle Linux，CentOS，Red Hat Linux。
+* 你無法在 Ubuntu , Windows 上打包產生 .rpm。
+
+.前置作業
+[IMPORTANT]
+====
+某些 Linux 預設沒有安裝 RPM 開發工具套件，這樣會導致在打包要產生 rpm 時，發生失敗。
+
+為了避免不必要的狀況發生，你可以手動執行以下指令來安裝RPM 開發工具套件。
+
+.安裝 RPM 開發工具套件
+[source,bash]
+----
+sudo yum update -y
+
+sudo yum groupinstall 'RPM Development Tools'
+----
+
+====
+
+.build Linux rpm
+[source,bash]
+----
+mvn clean package exec:exec@jpackage-linux-rpm
+
+# 以下是發生錯誤時，需要顯示更多資訊時。才去執行
+# mvn -X clean package exec:exec@jpackage-linux-rpm
+----
+
+==== 打包封裝 Windows MSI
+
+* 如果要打包封裝產生 .msi 檔案，需要在對應的 Windows 平台。
+* 你無法在 Linux 上打包產生 .msi。
+
+.前置作業
+[IMPORTANT]
+====
+打包 msi 檔案時，需要你已經安裝及設定 WiX 工具。
+如果沒有安裝及設定 WiX 工具，這樣會導致在打包要產生 msi 時，發生失敗。
+
+為了避免不必要的狀況發生，你可以手動執行以下指令來安裝及設定 WiX 工具。
+
+.安裝及設定 WiX 工具
+[source,bash]
+----
+mkdir C:\TOOLS
+mkdir C:\TOOLS\wix-bin
+
+手動下載 https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311-binaries.zip
+解壓縮 wix311-binaries.zip 到 C:\TOOLS\wix-bin
+
+手動新增使用者的環境變數 PATH , 加入一個指向 C:\TOOLS\wix-bin
+----
+
+====
+
+
+.build Windows msi
+[source,bash]
+----
+mvn clean package exec:exec@jpackage-windows-msi
+
+以下是發生錯誤時，需要顯示更多資訊時。才去執行
+mvn -X clean package exec:exec@jpackage-windows-msi
+----
+
+==== 打包封裝 MacOS DMG
+
+* 如果要打包封裝產生 .dmg 檔案，需要在對應的 MacOS 平台。
+* 你無法在 Linux 及 Windows 上打包產生 .dmg。
+
+目前沒有提供 打包封裝 MacOS DMG 的設定。
+
+如果你需要，你可能可以自己進行修改
+
+* pom.xml 中，仿照打包 Linux deb , Linux rpm 加入打包 MacOS 的設定。
+* 新增 src/main/resources/jpackage-files/starq-pen-app.macos.jpackage.settings
+裡面的設定 , 需要根據 在 MacOS 平台上的 `jpackage --help` 來查出相關設定。
+* src/main/resources/images 裡面的圖片 icon 部份，需要轉檔成　`.icns`
+
+因為沒有 MacOS 的機器可以進行測試，所以就沒有設定。
+
+=== 開發修改程式碼
+
+本專案使用 Maven 專案設定。
+
+所以你可以用你慣用的 Java IDE 工具匯入本 Maven 專案後，去進行程式碼的修改及測試。
+
+== 點讀筆貼紙顏色編號以及點讀筆檔案的對應
+
+如何知道點讀筆貼紙顏色編號以及點讀筆檔案目錄及檔案名稱的對應?
+
+* Step 1 - 下載 明日工作室提供的原廠 【自己動手做錄放音貼紙】MP3轉檔工具
+* Step 2 - 執行 【自己動手做錄放音貼紙】MP3轉檔工具
+**	選擇 某一貼紙顏色，輸入編號 1,
+**	選擇 批次置入, 選擇一堆 mp3 讓它批量置入
+* Step 3 - 去看看點讀筆裡面的路徑，從1號到1000號，對應的路徑及檔案是什麼。
+**　　　　　然後反推其規則。
+**　　　　　將其寫成對應的類別。(StarQPenRecStickerMapper.java)
+**　　　　  最笨的方法是寫死，寫死所有顏色編號對應的路徑，做成查表法。
+**　　　　  但是這樣會有問題，在不同平台的路徑分隔字元是不一樣的，還有起始的路徑位置也不一樣。
+**　　　　  所以還是根據規則動態產生對應路徑。
+**　　　　  還保留了如果是使用 wav 檔案名稱會不一樣，也有對應。	
+
+== 商標
+
+* 【StarQ 點讀】【StarQ 多功能點讀筆】 以及  【StarQ 自己動手做錄放音貼紙】 皆歸屬於 明日工作室股份有限公司
+* 相關 StarQ 點讀筆及相關產品圖片之商標及所有權 皆歸屬於 明日工作室股份有限公司
+
+== 功能考慮事項
+
+更早之前更原始的版本提供了：
+
+** 支援透過原生作業系統的檔案總管拖曳，複製貼上到本程式等等功能。操作上沒有比較便利，使用者在檔案總管選擇檔案後，再來本程式做貼上操作。沒有讓使用者比較便利與簡單。目前取消了。
+** 支援選項 詢問是否覆寫點讀筆上已經存在的檔案。目前預設就是覆寫，不詢問。
+** 選擇來源檔案支援選項 可以選擇 MP3, WAV, MP3+WAV。目前只保留 MP3。
+** 檢查對應的貼紙編號的檔案是否已經在點讀筆上已經存在。目前不顯示。
+** Logging 功能。使用者或開發者可以讓程式根據 log 設定檔，來進行除錯顯示不同詳細程度的輸出訊息。因為使用 jpackage 打包時，使用 logging 功能，會需要加入更多模組，會導致，打包出來的安裝檔案大小變大。目前取消。
+** 清單排序。點選清單的某欄位來做升冪或是降冪的排序。只會增加操作上的複雜度。目前不提供。
+
+功能及步驟越簡化越好。讓使用者可以越直覺操作越好。

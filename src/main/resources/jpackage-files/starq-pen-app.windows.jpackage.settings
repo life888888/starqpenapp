@@ -1,0 +1,9 @@
+--type msi
+--win-shortcut
+--win-shortcut-prompt
+--win-menu
+--win-menu-group Office
+--win-help-url "https://www.tomor.com/v2/Official/BrandStory"
+--icon "appassembler/lib/images/favicon.ico"
+--win-dir-chooser
+
