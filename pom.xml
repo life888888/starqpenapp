@@ -265,9 +265,8 @@
 							<workingDirectory>${project.build.directory}</workingDirectory>
 						</configuration>
 					</execution>
-					<!-- TODO ADD For Mac x86_64 -->
 					<execution>
-						<id>jpackage-macos-dmg</id>
+						<id>jpackage-macos-pkg</id>
 						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>exec</goal>
