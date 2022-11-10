@@ -3,4 +3,4 @@
 --linux-menu-group "Office"
 --about-url "https://www.tomor.com/v2/Official/BrandStory"
 --icon "appassembler/lib/images/favicon.png"
-
+--java-options "-splash:$APPDIR/images/splash.gif"
