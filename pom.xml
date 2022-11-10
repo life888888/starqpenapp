@@ -6,12 +6,12 @@
 	<artifactId>starq-pen-app</artifactId>
 	<!-- 警告 不要設定 x.x.x 以外的格式 , 如 SNAPSHOT -->
 	<!-- 因為 下方的 jpackage 會使用到這個設定 Windows 只接受 0.0.1 的格式 -->
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>StarQ Pen Rec Sticker App</name>
 	<description>StarQ 點讀筆 【自己動手做錄放音貼紙】MP3轉檔工具</description>
 	<properties>
-		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>19</maven.compiler.target>
+		<maven.compiler.source>19</maven.compiler.source>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -174,12 +174,15 @@
 			<!-- build Windows msi -->
 			<!-- mvn clean package exec:exec@jpackage-windows-msi -->
 			<!-- mvn -X clean package exec:exec@jpackage-windows-msi -->
+			<!-- build MacOSX pkg -->
+			<!-- mvn clean package exec:exec@jpackage-macos-pkg -->
+			<!-- mvn -X clean package exec:exec@jpackage-macos-pkg -->
+			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.0.0</version>
 				<executions>
-
 					<execution>
 						<id>jpackage-linux-deb</id>
 						<phase>pre-integration-test</phase>
@@ -263,6 +266,35 @@
 						</configuration>
 					</execution>
 					<!-- TODO ADD For Mac x86_64 -->
+					<execution>
+						<id>jpackage-macos-dmg</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>jpackage</executable>
+							<arguments>
+								<argument>@${project.build.directory}/jpackage-files/starq-pen-app.app.jpackage.settings</argument>
+								<argument>--main-jar</argument>
+								<argument>${project.artifactId}-${project.version}.jar</argument>
+
+								<argument>--description</argument>
+								<argument>"StarQ 點讀筆 【自己動手做錄放音貼紙】MP3轉檔工具"</argument>
+								<argument>--vendor</argument>
+								<argument>"${vendor.name.zh}"</argument>
+								<argument>--app-version</argument>
+								<argument>${project.version}</argument>
+								<argument>--add-modules</argument>
+								<argument>java.base,java.desktop</argument>
+								<argument>--type</argument>
+								<argument>pkg</argument>
+								<argument>--java-options</argument>
+								<argument>-XstartOnFirstThread</argument>								
+							</arguments>
+							<workingDirectory>${project.build.directory}</workingDirectory>
+						</configuration>
+					</execution>					
 					<!-- TODO ADD For RsaspberryPi Arm -->
 				</executions>
 			</plugin>
@@ -326,12 +358,11 @@
 				<zformat>zip</zformat>
 			</properties>
 		</profile>
-		<!-- NOT TEST -->
 		<profile>
 			<id>macosx</id>
 			<activation>
 				<os>
-					<name>macosx</name>
+					<name>Mac OS X</name>
 					<arch>x86_64</arch>
 				</os>
 			</activation>
