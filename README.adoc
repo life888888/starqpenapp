@@ -223,7 +223,9 @@ image:App018.png[]
 
 === 下載原始碼
 
-* Download `Releases/v0.0.1` (starq-pen-app-0.0.1)
+下載最新版本原始碼
+
+* Download https://github.com/life888888/starqpenapp/archive/refs/heads/main.zip
 * 下載後，解壓縮。
 
 === 編譯
@@ -234,6 +236,22 @@ image:App018.png[]
 
 * JDK 19.0.1 (開發環境, 建議使用 adoptium 家的 Open JDK , 避免 License 問題)
 * apache maven 3.8.4 (開發環境, 應該可以使用更低版本, 但是沒有測試過)
+
+* Linux / Mac OS X 建議安裝 sdkman 後，使用 sdkman 安裝 JDK 及 Maven
+
+[source,bash]
+----
+# INSTALL SDKMAN
+$ curl -s "https://get.sdkman.io" | bash
+$ source "$HOME/.sdkman/bin/sdkman-init.sh"
+$ exit
+
+# INSTALL TEMURIN JDK 19.0.1
+$ sdk install java 19.0.1-tem
+
+# INSTALL APACHE MAVEN
+$ sdk install maven
+----
 
 ==== 打包封裝 deb
 
