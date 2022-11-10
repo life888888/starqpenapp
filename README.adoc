@@ -232,7 +232,7 @@ image:App018.png[]
 
 請先確認，你的環境已經安裝以下工具，並且配置妥當。
 
-* JDK 17.0.2 (開發環境, 建議使用 adoptium 家的 Open JDK , 避免 License 問題)
+* JDK 19.0.1 (開發環境, 建議使用 adoptium 家的 Open JDK , 避免 License 問題)
 * apache maven 3.8.4 (開發環境, 應該可以使用更低版本, 但是沒有測試過)
 
 ==== 打包封裝 deb
@@ -317,21 +317,41 @@ mvn clean package exec:exec@jpackage-windows-msi
 mvn -X clean package exec:exec@jpackage-windows-msi
 ----
 
-==== 打包封裝 MacOS DMG
+==== 打包封裝 MacOS x86_64 PKG
 
-* 如果要打包封裝產生 .dmg 檔案，需要在對應的 MacOS 平台。
+* 如果要打包封裝產生 .pkg 檔案，需要在對應的 MacOS 平台。
 * 你無法在 Linux 及 Windows 上打包產生 .dmg。
 
-目前沒有提供 打包封裝 MacOS DMG 的設定。
+.build MacOS x86_64 pkg
+[source,bash]
+----
+mvn clean package exec:exec@jpackage-macos-pkg
 
-如果你需要，你可能可以自己進行修改
+以下是發生錯誤時，需要顯示更多資訊時。才去執行
+mvn -X clean package exec:exec@jpackage-macos-pkg
+----
 
-* pom.xml 中，仿照打包 Linux deb , Linux rpm 加入打包 MacOS 的設定。
-* 新增 src/main/resources/jpackage-files/starq-pen-app.macos.jpackage.settings
-裡面的設定 , 需要根據 在 MacOS 平台上的 `jpackage --help` 來查出相關設定。
-* src/main/resources/images 裡面的圖片 icon 部份，需要轉檔成　`.icns`
+.MacOS備註
+[IMPORTANT]
+====
+* MacOS 限定 `app-version` 必須是 `x.x.x` 格式且是整數，所以 `1.0.0` 可以，但是 `0.0.1` 不可以。
+* 先求有，再求好。先求可以產出 `.pkg` ，可以正常安裝，可以正常執行。
+** MacOS 的特有參數設定，並沒有加入設定。
+* 在使用 IDEA 直接執行 StarQPenRecStickerApp，發現會報錯誤訊息，提示必須加上 JVM 參數 `-XstartOnFirstThread` 。
+* 發現加入 JVM 參數 "-splash:$APPDIR/images/splash.gif" 會導致程式似乎沒有辦法進入主程式畫面。
+* `pom.xml` 的 profile id 為 macosx 的 os name 抓到的值是 **Mac OS X**。
 
-因為沒有 MacOS 的機器可以進行測試，所以就沒有設定。
+[source,xml]
+----
+<activation>
+	<os>
+		<name>Mac OS X</name>
+		<arch>x86_64</arch>
+	</os>
+</activation>
+----
+
+====
 
 === 開發修改程式碼
 
