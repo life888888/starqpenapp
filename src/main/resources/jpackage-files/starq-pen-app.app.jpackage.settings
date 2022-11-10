@@ -2,6 +2,5 @@
 --input appassembler/lib
 --copyright "Copyright (c) 2022 demo888888<demo888888@gmail.com>"
 --license-file appassembler/lib/LICENSE
---java-options "-splash:$APPDIR/images/splash.gif"
 --java-options "-ms64m"
 --java-options "-mx512m"
